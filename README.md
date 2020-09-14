@@ -83,7 +83,8 @@ After you have completed the requirements, **create** a new file called `stretch
 
 See if you can complete one or more of the following challenges:
 
-1. Predict the output of the code below and explain why this is the output using what you learned today. When you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions
+1. Predict the output of the code below and explain why this is the output using what you learned today.
+   When you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions
 
 ```js
 (function () {
@@ -93,15 +94,35 @@ console.log("a defined? " + (typeof a !== "undefined"));
 console.log("b defined? " + (typeof b !== "undefined"));
 ```
 
+**I predicted that b will be defined, while a will not be defined. Variables can be redefined, glocal, and reassigned. Thus, we are technically initializing and declaring b to equal 3, making it global since it does not have the var keyword. Since it's now global, it can be accessed in the outside of the scope of this anonymous function. However, a has the var keyword, making it locally scoped - and it cannot be accessed outside this function.**
+
 2. Write a function that would allow you to do this using a closure. (This is another interview question we've seen before - when you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions)).
 
 ```js
+function createBase(baseNum) {
+  return (N) => {
+    return baseNum + N;
+  };
+}
+
 var addSix = createBase(6);
 addSix(10); // returns 16
 addSix(21); // returns 27
 ```
 
 3. Research the differences between functional programming and object oriented programming. Then, describe the pros and cons of functional programming vs object-oriented programming. This is a common interview question and great practice!
+
+Object oriented programming organizes the codebase into units. It uses the concepts of abstraction (breaking down real-world entities into simplified models by context), encapsulation (bundling related data - vars, properties, methods - into classes), inheritance (sharing functionality among a collection of classes), and polymorphism (the ability to implement class instances differently).
+
+Functional programming, by contrast, treats data and operations as two separate entities. The goal is to avoid side effects, write pure functions, and maintain an order of operations governed by higher order functions.
+
+OOP is better for systems with data that can be bundled by related traits, and shared characteristics.
+It helps tremendously when organizing javascript web-based components and other assets.
+If your codebase is more like an "ecosystem" of logic where organization is key, OOP is best.
+
+FP is better for a high number of operations that require a series of clear, sequential operations.
+If you are performing calculations uding a moslty monolithic set of data, you would want to opt for FP.
+FP is great for highly performative tasks.
 
 ## Resources
 
