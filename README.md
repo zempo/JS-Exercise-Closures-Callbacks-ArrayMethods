@@ -9,7 +9,7 @@ The module challenge is the afternoon project or assignment that students work t
 ## Objectives
 
 - Explain function scope
-- Describe what closure is, how closure is created in a program and why it is important to understand closures in JavaScript  
+- Describe what closure is, how closure is created in a program and why it is important to understand closures in JavaScript
 
 ## Introduction
 
@@ -17,7 +17,7 @@ This challenge focuses on both scope and closures.
 
 In this challenge you will be working to build a `scoreboard` (in the console) that takes randomly generated data and keeps track of a game's progress. If you're not familiar with the rules of baseball what you need to know is this: there are 9 innings and teams take turns "at-bat." Teams can only score while they are at bat. A team stops being at bat once they have gotten 3 `outs` by either striking out or through game play. You can read more about baseball rules [here](https://www.rulesofsport.com/sports/baseball.html).
 
-A scoreboard in a major league stadium looks something like this. In fact, the scoreboard at Fenway Park in Boston is actually quite famous. 
+A scoreboard in a major league stadium looks something like this. In fact, the scoreboard at Fenway Park in Boston is actually quite famous.
 
 ![Fenway Scoreboard](https://storage.googleapis.com/afs-prod/media/media:e959506330fd4e5890023c93cfbaac55/800.jpeg)
 
@@ -42,29 +42,40 @@ Find the file `index.js` and complete the tasks until your tests are passing.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+
+**In JavaScript, closure happens when a function cannot find a variable or callback function called within its local scope - anywhere within its curly braces.**
+**Thus, in order to execute the code within its scope, the compiler will look for the variable or function outside the function scope.**
+**Closure can only happen with variables and functions outside of the function - at the global scope or with parent functions the function in question might be nested in.**
+
 2. Study the following code, then answer the questions below.
 
 ```js
-function personalDice(name){
-  return function(){
-      // generate random number between 1 and 6
+function personalDice(name) {
+  return function () {
+    // generate random number between 1 and 6
     const newRoll = Math.floor(Math.random() * 6);
-    console.log(`${name} rolled a ${newRoll}`)
-  }
+    console.log(`${name} rolled a ${newRoll}`);
+  };
 }
 
 const dansRoll = personalDice("Dan");
 
 const zoesRoll = personalDice("Zoe");
 
-
 dansRoll();
 dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+**Closure is used on the last bracket of the return of an anonymous function in personalDice. In order for the anonymous function to log to the console, it needs to look outside its scope for the name parameter.**
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
-c. What is the lexical scope of `newRoll`? 
+**In both instances, the name 'Dan' stays the same. The arguement 'Dan' is consistent. However, the roll could change because it is reinitialized and redefined each call.**
+
+c. What is the lexical scope of `newRoll`?
+
+**The lexical scope of newRoll is the Math.random() method.**
 
 ### Task 3 - Stretch Goals
 
@@ -72,19 +83,28 @@ After you have completed the requirements, **create** a new file called `stretch
 
 See if you can complete one or more of the following challenges:
 
-1. Predict the output of the code below and explain why this is the output using what you learned today. When you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions
+1. Predict the output of the code below and explain why this is the output using what you learned today.
+   When you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions
 
 ```js
-(function(){
-  var a = b = 3;
+(function () {
+  var a = (b = 3);
 })();
-console.log("a defined? " + (typeof a !== 'undefined'));
-console.log("b defined? " + (typeof b !== 'undefined'));
+console.log("a defined? " + (typeof a !== "undefined"));
+console.log("b defined? " + (typeof b !== "undefined"));
 ```
+
+**I predicted that b will be defined, while a will not be defined. Variables can be redefined, glocal, and reassigned. Thus, we are technically initializing and declaring b to equal 3, making it global since it does not have the var keyword. Since it's now global, it can be accessed in the outside of the scope of this anonymous function. However, a has the var keyword, making it locally scoped - and it cannot be accessed outside this function.**
 
 2. Write a function that would allow you to do this using a closure. (This is another interview question we've seen before - when you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions)).
 
 ```js
+function createBase(baseNum) {
+  return (N) => {
+    return baseNum + N;
+  };
+}
+
 var addSix = createBase(6);
 addSix(10); // returns 16
 addSix(21); // returns 27
@@ -92,7 +112,17 @@ addSix(21); // returns 27
 
 3. Research the differences between functional programming and object oriented programming. Then, describe the pros and cons of functional programming vs object-oriented programming. This is a common interview question and great practice!
 
+Object oriented programming organizes the codebase into units. It uses the concepts of abstraction (breaking down real-world entities into simplified models by context), encapsulation (bundling related data - vars, properties, methods - into classes), inheritance (sharing functionality among a collection of classes), and polymorphism (the ability to implement class instances differently).
 
+Functional programming, by contrast, treats data and operations as two separate entities. The goal is to avoid side effects, write pure functions, and maintain an order of operations governed by higher order functions.
+
+OOP is better for systems with data that can be bundled by related traits, and shared characteristics.
+It helps tremendously when organizing javascript web-based components and other assets.
+If your codebase is more like an "ecosystem" of logic where organization is key, OOP is best.
+
+FP is better for a high number of operations that require a series of clear, sequential operations.
+If you are performing calculations uding a moslty monolithic set of data, you would want to opt for FP.
+FP is great for highly performative tasks.
 
 ## Resources
 
@@ -104,6 +134,6 @@ addSix(21); // returns 27
 
 Follow these steps for completing your project.
 
-- [ ] Submit a pull request to merge <firstName-lastName> Branch into master (student's  Repo). **Please don't merge your own pull request**
+- [ ] Submit a pull request to merge <firstName-lastName> Branch into master (student's Repo). **Please don't merge your own pull request**
 - [ ] Add your Team Lead as a reviewer on the pull request
 - [ ] Your Team Lead will count the project as complete by merging the branch back into master
